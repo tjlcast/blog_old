@@ -1,0 +1,41 @@
+
+{% load staticfiles %}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<meta http-equiv="content-language" content="en" />
+	<meta name="description" content="{{ SITE_DESC }}" />
+	<meta name="author" content="Template:TemplatesDock " />
+	<link rel="stylesheet" media="screen,projection" type="text/css" href="{% static 'css/main.css' %}" />
+	<link rel="stylesheet" media="screen,projection" type="text/css" href="{% static 'css/skin.css' %}" />
+    <link rel="stylesheet" media="screen,projection" type="text/css" href="{% static 'css/botton.css' %}" />
+	<script type="text/javascript" src="{% static 'javascript/cufon-yui.js' %}"></script>
+
+	<script type="text/javascript">Cufon.replace('h1, h2, h3, h4, h5, h6', {hover:true});</script>
+	<title>{{ SITE_NAME }}</title>
+</head>
+
+<body>
+
+<div class="main">
+
+	<!-- HEADER -->
+	<div id="header" class="box">
+
+		<h1 id="logo">Blog<span> {{ SITE_NAME }}</span></h1>
+
+		<!-- NAVIGATION -->
+		<ul id="nav">
+			<li class="current"><a href='{% url 'index' %}'>首页</a></li>
+			<li><a href="#">我的博客</a></li>
+            {% if request.user.is_authenticated %}
+			<li><a href="{% url 'logout' %}">注销</a></li>
+            {% else %}
+            <li><a href="{% url 'login' %}">登录</a></li>
+            {% endif %}
+		</ul>
+
+	</div> <!-- /header -->

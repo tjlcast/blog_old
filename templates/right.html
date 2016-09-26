@@ -1,0 +1,49 @@
+<!-- SIDEBAR -->
+		<div id="aside">
+
+			<!-- SIDEBAR MENU -->
+			<h3>分类</h3>
+
+			<ul class="menu">
+{#                <li class="current"><a href="#">全部</a></li>#}
+                {% for category in category_list %}
+                    <li><a href="{% url 'category' %}?cid={{ category.id }}">{{ category.name }}</a></li>
+                {% endfor %}
+			</ul>
+
+            <h3 class="nomb">文章归类</h3>
+
+			<ul class="sponsors">
+                {% if not archive_list %}
+                    当前没有文章归档信息
+                {% endif %}
+                {% for archive in archive_list %}
+                    <li>
+					<a href="#">{{ archive }}文章存档</a><br />
+				    </li>
+                {% endfor %}
+			</ul>
+
+{#			<h3 class="nomb">名人推荐</h3>#}
+{##}
+{#			<ul class="sponsors">#}
+{#				<li>#}
+{#					<a href="#">Black</a><br />#}
+{#					我的风景啊吧付款即可不急哈是丢噶空间吧可是记得把电脑#}
+{#				</li>#}
+{#				<li>#}
+{#					<a href="#">TemplatesDock</a><br />#}
+{#					我的风景啊吧付款即可不急哈是丢噶空间吧可是记得把电脑撒大大大#}
+{##}
+{#				</li>#}
+{#				<li>#}
+{#					<a href="#">AppsTemplates</a><br />#}
+{#					我的风景啊吧付款即可不急哈是丢噶空间吧可是记得把电脑撒大大大#}
+{#				</li>#}
+{#				<li>#}
+{#					<a href="#">AdminSquare</a><br />#}
+{#					我的风景啊吧付款即可不急哈是丢噶空间吧可是记得把电脑撒大大大#}
+{#				</li>#}
+{#			</ul>#}
+
+		</div> <!-- /aside -->

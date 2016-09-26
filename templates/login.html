@@ -1,0 +1,65 @@
+{% include 'header.html' %}
+
+<div id="section" class="box">
+
+		<!-- CONTENT -->
+		<div id="content">
+			<div style="margin:50px 0px 50px 90px">
+				<h2>登 录</h2>
+				<form action="{% url 'login' %}" method="post" class="form">
+                    {% csrf_token %}
+					<ul>
+						<li>
+							<label for="input-01">用户名</label>
+							<input type="text" size="45" class="input-text" id="input-01" name="username" placeholder="Username" required/>
+						</li>
+
+						<li>
+							<label for="input-03">密码</label>
+							<input type="password" size="45" class="input-text" id="input-03" name="password" placeholder="Password" required/>
+						</li>
+
+                        <input type="hidden" name="source_url" value="{{ request.META.HTTP_REFERER }}">
+
+						<li><input type="submit" value=" 提交 " class="input-submit"  /></li>
+                        <div class="clear"> </div>
+
+						<a href="{% url 'register' %}">没有账号去注册</a>
+					</ul>
+				</form>
+
+			</form>
+			</div>
+		</div>
+
+		<!-- SIDEBAR -->
+		<div id="aside">
+
+			<!-- SIDEBAR MENU -->
+			<h3 class="nomb">名人推荐</h3>
+
+			<ul class="sponsors">
+				<li>
+					<a href="#">Black</a><br />
+					我的风景啊吧付款即可不急哈是丢噶空间吧可是记得把电脑
+				</li>
+				<li>
+					<a href="#">TemplatesDock</a><br />
+					我的风景啊吧付款即可不急哈是丢噶空间吧可是记得把电脑撒大大大
+
+				</li>
+				<li>
+					<a href="#">AppsTemplates</a><br />
+					我的风景啊吧付款即可不急哈是丢噶空间吧可是记得把电脑撒大大大
+				</li>
+				<li>
+					<a href="#">AdminSquare</a><br />
+					我的风景啊吧付款即可不急哈是丢噶空间吧可是记得把电脑撒大大大
+				</li>
+			</ul>
+
+		</div> <!-- /aside -->
+
+	</div> <!-- /section -->
+
+{% include 'footer.html' %}

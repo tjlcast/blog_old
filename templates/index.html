@@ -1,0 +1,70 @@
+{% include 'header.html' %}
+{% load myfilter %}
+
+
+<!-- SECTION -->
+	<div id="section" class="box">
+
+		<!-- CONTENT -->
+		<div id="content">
+
+			<!-- LIST OF ARTICLES -->
+			<ul class="articles box">
+
+                {% for article in article_list %}
+                    <li>
+                        <h2><a href="{% url 'article' %}?id={{ article.id }}">{{ article.title }}</a></h2>
+
+                        <div class="article-info box">
+
+                            <p class="f-right"><a href="#" class="comment">评论 ({{ article.comment_set.all.count }})</a></p>
+
+                            <p class="f-left">{{ article.date_publish }} | 作者 <a href="#">{{ article.user.username }}</a></p>
+
+                        </div> <!-- /article-info -->
+
+                        <p>{{ article.desc | safe  }}</p>
+                        <p class="more"><a href="{% url 'article' %}?id={{ article.id }}">查看全文&raquo;</a></p>
+                    </li>
+                {% endfor %}
+			</ul>
+
+			<!-- PAGINATION -->
+			<div class="pagination box">
+
+				<p class="f-right">
+                    {% if article_list.has_previous %}
+                    <a href="?page={{ article_list.previous_page_number }}{% if request.GET.year %}&year={{ request.GET.year }}{% endif %}{% if request.GET.month %}&month={{ request.GET.month }}{% endif %}{% if request.GET.cid %}&cid={{ request.GET.cid }}{% endif %}">&laquo;上一页</a>
+                    {% else %}
+                    <a style="display: none">&laquo;上一页</a>
+                    {% endif %}
+
+                    {% for page_no in article_list.page_range_ext %}
+                        <a href="#" {% if page_no == article_list.number %}class="current"{% endif %}>{{ page_no }}</a>
+                    {% endfor %}
+{#					<a href="#" class="current">1</a>#}
+{#					<a href="#">2</a>#}
+{#					<a href="#">3</a>#}
+{#					<a href="#">4</a>#}
+{#					<a href="#">5</a>#}
+{#					<a href="#">6</a>#}
+{#					<a href="#">7</a>#}
+
+                    {% if article_list.has_next %}
+                        <a href="?page={{ article_list.next_page_number }}{% if request.GET.year %}&year={{ request.GET.year }}{% endif %}{% if request.GET.month %}&month={{ request.GET.month }}{% endif %}{% if request.GET.cid %}&cid={{ request.GET.cid }}{% endif %}">下一页 &raquo;</a>
+                    {% else %}
+                        <a style="display: none">下一页 &raquo;</a>
+                    {% endif %}
+
+				</p>
+				
+				<p class="f-left">{{ article_list.number }} / {{ article_list.paginator.num_pages }}页</p>
+
+			</div> 
+		
+		</div> 
+
+		{% include 'right.html' %}
+
+	</div> <!-- /section -->
+{% include 'footer.html' %}

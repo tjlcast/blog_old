@@ -1,0 +1,147 @@
+{% include 'header.html' %}
+{% load myfilter %}
+
+<div id="section" class="box">
+    <h2>{{ article.title | safe }}</h2>
+
+    <div>
+        {% if request.user.is_authenticated %}<p class="f-right"><a href="#" class="comment">编辑</a></p>{% endif %}
+        <p class="f-left">{{ article.date_publish | date:"Y-m-d H:i:s" }} | 分类 {{ article.category.name }} </p>
+    </div>
+
+    <div style="border-bottom: 1px dotted #CCC; height:50px;"></div>
+    <div style="padding:10px">
+        {{ article.content | safe }}
+    </div>
+    <div style="border-bottom: 1px dotted #CCC;"></div>
+    <h3>评论:</h3>
+
+    {% if not comment %}
+        （当前博文还没有评论哦！来留下点足迹吧）
+    {% endif %}
+
+    {% for comment in comment_list %}
+        <div style="padding:0 0 0 10px">
+            <div>
+            <a href="#">{{ comment.user.username }}说：</a>
+            </div>
+            <br />
+            {{ comment.content | safe }}
+            <br/>
+            评论时间: {{ comment.date_publish | date:'Y/m/d - H:i:s' }}
+            <br />
+            {% if request.user.is_authenticated %}
+            <div>
+                <form action="{% url 'comment_post' %}" method="post">
+                        {% csrf_token %}
+
+                        <input style="display: none" type="hidden" class="comment_input" id="author" maxlength="50" name="author" size="25"
+                                  tabindex="1"
+                                  type="text" required="" value={{ request.user.username }}>
+
+                        <input style="display: none" type="hidden" class="comment_input" id="email" maxlength="50" name="email" size="25"
+                                  tabindex="2"
+                                  type="email" required="" value={{ request.user.email }}>
+
+                        <input style="display: none" type="hidden" class="comment_input" id="url" maxlength="100" name="url" size="25"
+                                  tabindex="3" type="url" value={{ request.user.url }}>
+
+
+                        <textarea id="input_text" class="message_input" cols="2" name="comment" rows="1" tabindex="4" required="" style="margin: 0px; width: 360px; height: 26px;"></textarea>
+
+                        <input style="display: none"  id="id_article" name="article" type="hidden" value={{ article.id }}>
+
+                        <input style="display: none" id="id_pid" name="pid" type="hidden" value={{ comment.id }}>
+
+                        <input type="submit" style="float: right" value=" 回复 " class="input-submit">
+                    </form>
+            </div>
+            {% endif %}
+        </div>
+        <div style="border-bottom: 1px dotted #CCC;">
+        {% for childc in comment.children_comment %}
+
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <div style="padding-left: 30px;" >
+            <div>
+            <a href="#">{{ comment.username }} 回复：{{ childc.username }}</a>
+            </div>
+            <br />
+            {{ childc.content | safe }}
+            <br/>
+            评论时间: {{ childc.date_publish | date:'Y/m/d - H:i:s' }}
+            <br />
+            {% if request.user.is_authenticated %}
+            <div>
+                <form action="{% url 'comment_post' %}" method="post">
+                        {% csrf_token %}
+
+                        <input style="display: none" type="hidden" class="comment_input" id="author" maxlength="50" name="author" size="25"
+                                  tabindex="1"
+                                  type="text" required="" value={{ request.user.username }}>
+
+                        <input style="display: none" type="hidden" class="comment_input" id="email" maxlength="50" name="email" size="25"
+                                  tabindex="2"
+                                  type="email" required="" value={{ request.user.email }}>
+
+                        <input style="display: none" type="hidden" class="comment_input" id="url" maxlength="100" name="url" size="25"
+                                  tabindex="3" type="url" value={{ request.user.url }}>
+
+
+                        <textarea id="input_text" class="message_input" cols="2" name="comment" rows="1" tabindex="4" required="" style="margin: 0px; "></textarea>
+
+                        <input style="display: none"  id="id_article" name="article" type="hidden" value={{ article.id }}>
+
+                        <input style="display: none" id="id_pid" name="pid" type="hidden" value={{ comment.id }}>
+
+                        <input type="submit" style="float: right" value=" 回复 " class="input-submit">
+                    </form>
+            </div>
+            {% endif %}
+            </div>
+
+        {% endfor %}
+        </div>
+        <br/>
+    {% endfor %}
+
+    <h3>留言:</h3>
+    <form action="{% url 'comment_post' %}" method="post">
+        {% csrf_token %}
+
+        <p>{{ comment_form.author }}
+            <label for="author">Name (required)</label></p>
+
+        <p>{{ comment_form.email }}
+            <label for="email">Email (Will NOT be published) (required)</label></p>
+
+        <p>{{ comment_form.url }}
+            <label for="url">URL</label></p>
+
+
+        <p>{{ comment_form.comment }}</p>
+
+        <p>
+            {#   隐藏属性     #}
+            {{ comment_form.article }}
+
+            {{ comment_form.pid }}
+            <input type="submit" value=" 提交 " class="input-submit">
+{#            <input name="submit" type="submit" id="submit" tabindex="5" value="Submit" class="button"/>#}
+        </p>
+    </form>
+
+    <form action="#" method="post" class="form" style="display: none">
+        <ul>
+            <textarea cols="75" rows="5" class="input-text" name=""></textarea>
+
+            <li><input type="submit" value=" 提交 " class="input-submit"/></li>
+
+        </ul>
+    </form>
+
+</div>
+
+</div>
+
+{% include 'footer.html' %}

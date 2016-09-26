@@ -1,0 +1,7 @@
+2016-09-25 08:33:54,725 [Thread-10:123145310715904] [blog.views:96] [views:comment_post] [ERROR] - 'content'
+2016-09-26 14:50:10,679 [Thread-14:123145323335680] [blog.views:159] [views:login] [ERROR] - failure.html
+2016-09-26 14:51:26,278 [Thread-7:123145323335680] [blog.views:160] [views:login] [ERROR] - failure.html
+2016-09-26 14:51:37,549 [Thread-14:123145323335680] [blog.views:160] [views:login] [ERROR] - failure.html
+2016-09-26 14:57:29,369 [Thread-15:123145323335680] [blog.views:160] [views:login] [ERROR] - failure.html
+2016-09-26 14:57:29,395 [Thread-18:123145327542272] [blog.views:160] [views:login] [ERROR] - failure.html
+2016-09-26 14:57:29,795 [Thread-21:123145331748864] [blog.views:160] [views:login] [ERROR] - login() takes exactly 1 argument (2 given)
