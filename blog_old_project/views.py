@@ -23,6 +23,7 @@ def global_settings(request):
     # SITE_URL = settings.SITE_URL
     SITE_NAME = settings.SITE_NAME
     SITE_DESC = settings.SITE_DESC
+    # action_name = request.GET.get('action', 'index')
     return locals()
 
 
@@ -120,6 +121,20 @@ def comment_post(request):
     return redirect(request.META['HTTP_REFERER'])
 
 
+# 文章归档
+def archive(request):
+    try:
+        year = request.GET.get('year', None)
+        month = request.GET.get('month', None)
+        article_list = Article.objects.filter(date_publish__icontains=year + '-' + month)
+        article_list = getPaginator(request, article_list, 1, 5)
+    except Exception as e:
+        print e
+        logger.error(e)
+    return render(request, 'archive.html', locals())
+
+
+
 # 文章分类
 def category(request):
     try:
@@ -177,3 +192,4 @@ def do_logout(request):
     except Exception as e:
         logger.error(e)
     return redirect(request.META['HTTP_REFERER'])
+

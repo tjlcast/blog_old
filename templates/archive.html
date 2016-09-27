@@ -1,0 +1,52 @@
+{% include 'header.html' %}
+
+<!-- COLUMNS -->
+	<div id="section" class="box">
+		<div class="button black"> {{ year }}-{{ month }}文件归档 </div>
+
+		<div style="border-bottom: 1px dotted #CCC;margin: 10px 0 0 0"></div>
+		<ul class="articles box">
+                {% for article in article_list %}
+                    <li>
+					<h2><a href="{% url 'article' %}?id={{ article.id }}">{{ article.title }}</a></h2>
+
+					<div class="article-info box">
+
+						<p class="f-right"><a href="{% url 'article' %}?id={{ article.id }}" class="comment">评论 ({{ article.comment_set.all.count }})</a></p>
+
+						<p class="f-left">{{ article.date_publish | date:'Y-m-d H:i:s' }} | 分类 {{ article.category.name }} </p>
+
+					</div> <!-- /article-info -->
+
+					<p>{{ article.desc }}</p>
+					{% if request.user.is_authenticated %}<p class="more"><a href="#">删除&raquo;</a></p>{% endif %}
+				    </li>
+                {% endfor %}
+
+			</ul>
+            <div class="pagination box">
+                    {% if article_list.has_previous %}
+                        <a href="?page=
+                                {{ article_list.previous_page_number }}{% if request.GET.year %}&year={{ request.GET.year }}{% endif %}{% if request.GET.month %}&month={{ request.GET.month }}{% endif %}{% if request.GET.cid %}&cid={{ request.GET.cid }}{% endif %}">&laquo;上一页</a>
+                    {% else %}
+                        <a style="display: none">&laquo;上一页</a>
+                    {% endif %}
+
+                    {% for page_no in article_list.page_range_ext %}
+                        <a href="#" {% if page_no == article_list.number %}class="current"{% endif %}>{{ page_no }}</a>
+                    {% endfor %}
+
+                    {% if article_list.has_next %}
+                        <a href="?page={{ article_list.next_page_number }}{% if request.GET.year %}&year={{ request.GET.year }}{% endif %}{% if request.GET.month %}&month={{ request.GET.month }}{% endif %}{% if request.GET.cid %}&cid={{ request.GET.cid }}{% endif %}">下一页 &raquo;</a>
+                    {% else %}
+                        <a style="display: none">下一页 &raquo;</a>
+                    {% endif %}
+
+                    <p class="f-left"> {{ article_list.number }} / {{ article_list.paginator.num_pages }} 页</p>
+
+            </div>
+	</div>
+
+
+
+{% include 'footer.html' %}

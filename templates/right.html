@@ -19,7 +19,8 @@
                 {% endif %}
                 {% for archive in archive_list %}
                     <li>
-					<a href="#">{{ archive }}文章存档</a><br />
+
+					<a href='{% url 'archive' %}?year={{ archive | slice:":4" }}&month={{ archive | slice:"5:7" }}'>{{ archive }}文章存档</a><br />
 				    </li>
                 {% endfor %}
 			</ul>

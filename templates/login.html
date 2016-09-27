@@ -3,6 +3,7 @@
 <div id="section" class="box">
 
 		<!-- CONTENT -->
+        {% if not request.user.is_authenticated %}
 		<div id="content">
 			<div style="margin:50px 0px 50px 90px">
 				<h2>登 录</h2>
@@ -31,6 +32,14 @@
 			</form>
 			</div>
 		</div>
+        {% else %}
+            <div id="content">
+			<div style="margin:50px 0px 50px 90px">
+				<h1>您已经成功登录。。。</h1>
+				<h2>欢迎:{{ request.user.username }}</h2>
+			</div>
+		    </div>
+        {% endif %}
 
 		<!-- SIDEBAR -->
 		<div id="aside">

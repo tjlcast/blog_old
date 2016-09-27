@@ -20,6 +20,7 @@ from blog_old_project.views import category
 from blog_old_project.views import do_login
 from blog_old_project.views import do_register
 from blog_old_project.views import do_logout
+from blog_old_project.views import archive
 
 urlpatterns = [
     url(r'^article/$', article, name='article'),
@@ -28,4 +29,5 @@ urlpatterns = [
     url(r'login/$', do_login, name='login'),
     url(r'register/$', do_register, name='register'),
     url(r'logout/$', do_logout, name='logout'),
+    url(r'archive/$', archive, name='archive'),
 ]
