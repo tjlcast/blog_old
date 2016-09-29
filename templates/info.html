@@ -5,13 +5,16 @@
     <h2>{{ article.title | safe }}</h2>
 
     <div>
-        {% if request.user.is_authenticated %}<p class="f-right"><a href="#" class="comment">编辑</a></p>{% endif %}
+        {% if request.user.is_authenticated and request.user.username == article.user.username %}
+
+            <p class="f-right"><a href="#" class="comment">编辑</a></p>
+        {% endif %}
         <p class="f-left">{{ article.date_publish | date:"Y-m-d H:i:s" }} | 分类 {{ article.category.name }} </p>
     </div>
 
     <div style="border-bottom: 1px dotted #CCC; height:50px;"></div>
     <div style="padding:10px">
-        {{ article.content | safe }}
+        {{ article.content | my_markdown | safe }}
     </div>
     <div style="border-bottom: 1px dotted #CCC;"></div>
     <h3>评论:</h3>

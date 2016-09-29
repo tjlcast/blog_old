@@ -9,3 +9,15 @@
 2016-09-27 02:56:49,559 [Thread-10:123145323335680] [blog.views:174] [views:do_login] [ERROR] - failure.html
 2016-09-27 02:57:21,334 [Thread-18:123145323335680] [blog.views:174] [views:do_login] [ERROR] - failure.html
 2016-09-27 03:07:29,686 [Thread-60:123145323335680] [blog.views:174] [views:do_login] [ERROR] - failure.html
+2016-09-27 06:12:21,554 [Thread-12:123145323335680] [blog.views:206] [views:do_register] [ERROR] - Reverse for '' with arguments '()' and keyword arguments '{}' not found. 0 pattern(s) tried: []
+2016-09-27 06:26:43,661 [Thread-12:123145323335680] [blog.views:212] [views:do_register] [ERROR] - '_password' is an invalid keyword argument for this function
+2016-09-27 06:27:06,194 [Thread-14:123145323335680] [blog.views:212] [views:do_register] [ERROR] - failure.html
+2016-09-27 06:29:16,095 [Thread-12:123145323335680] [blog.views:212] [views:do_register] [ERROR] - failure.html
+2016-09-27 06:30:49,768 [Thread-13:123145323335680] [blog.views:212] [views:do_register] [ERROR] - UNIQUE constraint failed: blog_old_project_user.username
+2016-09-27 06:40:31,625 [Thread-19:123145323335680] [blog.views:212] [views:do_register] [ERROR] - UNIQUE constraint failed: blog_old_project_user.username
+2016-09-29 03:04:25,876 [Thread-114:123145310715904] [blog.views:177] [views:do_login] [ERROR] - failure.html
+2016-09-29 03:04:40,943 [Thread-115:123145310715904] [blog.views:177] [views:do_login] [ERROR] - failure.html
+2016-09-29 03:07:56,383 [Thread-29:123145323335680] [blog.views:177] [views:do_login] [ERROR] - failure.html
+2016-09-29 03:30:12,304 [Thread-12:123145323335680] [blog.views:177] [views:do_login] [ERROR] - Reverse for '' with arguments '()' and keyword arguments '{}' not found. 0 pattern(s) tried: []
+2016-09-29 03:32:12,714 [Thread-32:123145323335680] [blog.views:177] [views:do_login] [ERROR] - failure.html
+2016-09-29 03:33:08,122 [Thread-34:123145323335680] [blog.views:177] [views:do_login] [ERROR] - failure.html

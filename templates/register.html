@@ -3,40 +3,52 @@
 <div id="section" class="box">
 
 		<!-- CONTENT -->
+        {% if not request.user.is_authenticated %}
 		<div id="content">
 			<div style="margin:10px 0px 50px 120px">
 				<h2>注 册</h2>
-				<form action="#" method="post" class="form">
+				<form action="{% url 'register' %}" method="post" class="form">
+                    {% csrf_token %}
 					<ul>
 						<li>
 							<label >用户名<font color="red"> *请用邮箱注册</font></label>
-							<input type="text" size="45" class="input-text" name="" />
+							<input type="text" size="45" class="input-text" name="username" />
 							<font color="red"> *请用邮箱注册</font>
 						</li>
 
 						<li>
 							<label >密码 </label>
-							<input type="password" size="45" class="input-text"  name="" />
+							<input type="password" size="45" class="input-text"  name="password" />
 						</li>
 						<li>
 							<label>再次输入密码 </label>
-							<input type="password" size="45" class="input-text"  name="" />
+							<input type="password" size="45" class="input-text"  name="password_repeated" />
 						</li>
 
 						<li>
-							<label >昵称<font color="red"> *2-6个汉字</font></label>
-							<input type="text" size="45" class="input-text"  name="" />
+							<label >个人主页<font color="red"> *http地址</font></label>
+							<input type="text" size="45" class="input-text"  name="url" />
 						</li>
 						<li>
-							<label >个人简介<font color="red"> *最多30个汉字</font></label>
-							<textarea cols="47" rows="2" class="input-text"  name=""></textarea>
+							<label >个人邮箱<font color="red"> *邮箱地址</font></label>
+							<textarea cols="47" rows="2" class="input-text"  name="email"></textarea>
 						</li>
+
+                        <input type="hidden" name="source_url" value="{{ request.META.HTTP_REFERER }}">
 
 						<li><input type="submit" value=" 提交 " class="input-submit" /></li>
 					</ul>
 				</form>
 			</div>
 		</div> <!-- /content -->
+        {% else %}
+             <div id="content">
+			<div style="margin:50px 0px 50px 90px">
+				<h1>您已经成功注册并登录。。。</h1>
+				<h2>欢迎您:{{ request.user.username }}</h2>
+			</div>
+		    </div>
+        {% endif %}
 
 		<!-- SIDEBAR -->
 		<div id="aside">

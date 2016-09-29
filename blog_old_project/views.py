@@ -7,8 +7,11 @@ from blog_old_project.models import Article
 from blog_old import settings
 from blog_old_project.models import Category
 from blog_old_project.models import Comment
+from blog_old_project.models import User
 from blog_old_project.forms import CommentForm
 from blog_old_project.forms import LoginForm
+from blog_old_project.forms import RegisterForm
+from django.contrib.auth.hashers import make_password, check_password
 from django.core.paginator import Paginator, InvalidPage, EmptyPage, PageNotAnInteger
 from blog_old_project.tools.MyPagination import JuncheePaginator
 
@@ -35,7 +38,7 @@ def index(request):
 
         #文章分页信息
         cur_page = int(request.GET.get('page', '0'))
-        article_list = getPaginator(request, article_list, cur_page, 2)
+        article_list = getPaginator(request, article_list, cur_page, )
 
         # 分类信息获取（导航数据）
         category_list = Category.objects.all()[:6]
@@ -179,7 +182,31 @@ def do_login(request):
 # 注册
 def do_register(request):
     try:
-        pass
+        if request.method == "POST":
+            register_form = RegisterForm(request.POST)
+
+            if register_form.is_valid():
+                # 开始注册
+                username = register_form.cleaned_data['username']
+                password = register_form.cleaned_data['password']
+                email = register_form.cleaned_data['email']
+                url = register_form.cleaned_data['url']
+
+                user = User.objects.create(username=username,
+                                           password=make_password(password, None, 'pbkdf2_sha256'),
+                                            email=email,
+                                            url=url,)
+                user.save()
+
+                # 登录
+                user.backend = 'django.contrib.auth.backends.ModelBackend'  # 指定默认的登录验证方式
+                login(request, user)
+                return redirect(request.POST.get('source_url'))
+            else:
+                return render(request, 'failure.html', {'msg' : '注册失败'})
+        else:
+            register_form = RegisterForm()
+
     except Exception as e:
         logger.error(e)
     return render(request, 'register.html', locals())
