@@ -21,13 +21,28 @@ from blog_old_project.views import do_login
 from blog_old_project.views import do_register
 from blog_old_project.views import do_logout
 from blog_old_project.views import archive
+from blog_old_project.views import blog
+from blog_old_project.views import blogs
+from blog_old_project.views import signin
+from blog_old_project.views import register
+from blog_old_project.views import blog_edit
+from blog_old_project.views import mark
+from blog_old_project.views import reply_comment
+
 
 urlpatterns = [
     url(r'^article/$', article, name='article'),
     url(r'^comment/post/$', comment_post, name='comment_post'),
     url(r'category/$', category, name='category'),
     url(r'login/$', do_login, name='login'),
-    url(r'register/$', do_register, name='register'),
+    # url(r'register/$', do_register, name='register'),
     url(r'logout/$', do_logout, name='logout'),
     url(r'archive/$', archive, name='archive'),
+    url(r'blog/$', blog, name='blog'),
+    url(r'blogs/$', blogs, name='blogs'),
+    url(r'signin/$', signin, name='signin'),
+    url(r'register/$', register, name='register'),
+    url(r'blog_edit/$', blog_edit, name='blog_edit'),
+    url(r'mark/$', mark, name='mark'),
+    url(r'reply_comment/$', reply_comment, name='reply_comment'),
 ]

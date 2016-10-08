@@ -1,10 +1,11 @@
 # -*- coding:utf-8 -*-
 
 from django import template
-from markdown import markdown
+# from markdown import markdown
 from django.utils.encoding import force_text
 from django.utils.safestring import mark_safe
 # import markdown2
+import blog_old_project.markdown2
 register = template.Library()
 
 # 定义一个将日期中的月份转换为大写的过滤器，如8转为八
@@ -30,21 +31,18 @@ def generate_range(page):
     return range(page.start_index(), page.end_index()+1)
 
 
+def text2html(text):
+    lines = map(lambda s: '<p>%s</p>' % s.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;'), filter(lambda s: s.strip() != '', text.split('\n')))
+    return ''.join(lines)
+
+
 def my_markdown(value):
-    return markdown(value)
+    # value = text2html(value)
+    value =  blog_old_project.markdown2.markdown(value)
+    return value
 
-
-def my_markdownsafe(value):
-    return mark_safe(markdown(value))
-
-
-# def custom_markdown(value):
-#     return mark_safe(markdown2.markdown(force_text(value),
-#                                         extras=["fenced-code-blocks", "cuddled-lists", "metadata", "tables",
-#                                                 "spoiler"]))
 
 register.filter('my_markdown', my_markdown)
-register.filter('my_markdownsafe', my_markdownsafe)
 register.filter('month_to_upper', month_to_upper)
 register.filter('list_empty', list_empty)
 register.filter('content_slice', content_slice)

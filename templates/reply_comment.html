@@ -1,0 +1,133 @@
+{% extends "__base__.html" %}
+
+{% load myfilter %}
+
+
+{% block beforehead %}
+    <link rel="stylesheet" href="/static/uikit/css/uikit.min.css"/>
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/uikit/js/uikit.min.js"></script>
+
+    <!-- Codemirror and marked dependencies -->
+    <link rel="stylesheet" href="/static/codemirror/lib/codemirror.css">
+    <script src="/static/codemirror/lib/codemirror.js"></script>
+    <script src="/static/codemirror/mode/markdown/markdown.js"></script>
+    <script src="/static/codemirror/addon/mode/overlay.js"></script>
+    <script src="/static/codemirror/mode/xml/xml.js"></script>
+    <script src="/static/codemirror/mode/gfm/gfm.js"></script>
+    <script src="/static/js/marked/marked.min.js"></script>
+
+    <!-- HTML editor CSS and JavaScript -->
+    <link rel="stylesheet" href="/static/uikit/css/components/htmleditor.css">
+    <script src="/static/uikit/js/components/htmleditor.js"></script>
+{% endblock %}
+
+{% block content %}
+
+    <!-- COLUMNS -->
+    <div id="section" class="box">
+
+        <form action="{% url 'article' %}" method="get">
+          <button class="button black" name="id" value="{{ comment.article.id }}"> 返回</button>
+        </form>
+
+        <br/>
+        <h3>话题:</h3>
+
+        <div style="border-bottom: 1px dotted #CCC;margin: 10px 0 0 0"></div>
+        <br/>
+        <ul class="articles box">
+
+            {#      父话题          #}
+            <li>
+                <div style="border-bottom: 1px dotted #CCC;">
+                    <div style="padding:0 0 0 10px">
+                        <div>
+                            <a href="#">{{ comment.user.username }}说：</a>
+                        </div>
+                        {{ comment.content | my_markdown| safe }}
+                        评论时间: {{ comment.date_publish | date:'Y/m/d - H:i:s' }}
+                        <br/>
+
+                    </div>
+                </div>
+            </li>
+
+
+            {% for childc in comment_children_list %}
+                <li>
+                    <div style="border-bottom: 1px dotted #CCC;">
+                        <div style="padding-left: 30px;">
+
+                            <div>
+                                <a href="#">{{ comment.username }} 回复：{{ childc.username }}</a>
+                            </div>
+                            {{ childc.content | my_markdown | safe }}
+                            评论时间: {{ childc.date_publish | date:'Y/m/d - H:i:s' }}
+                            <br/>
+
+                        </div>
+                    </div>
+                </li>
+
+            {% endfor %}
+
+            <br/>
+
+
+        </ul>
+
+        <!-- PAGINATION -->
+			<div class="pagination box">
+
+				<p class="f-right">
+                    {% if comment_children_list.has_previous %}
+                    <a href="?page={{ comment_children_list.previous_page_number }}&comment_id={{ comment_id }}&article_id={{ article_id }}">&laquo;上一页</a>
+                    {% else %}
+                    <a style="display: none">&laquo;上一页</a>
+                    {% endif %}
+
+{#                    {% for page_no in article_list.page_range_ext %}#}
+{#                        <a href="#" {% if page_no == article_list.number %}class="current"{% endif %}>{{ page_no }}</a>#}
+{#                    {% endfor %}#}
+
+                    {% if comment_children_list.has_next %}
+                        <a href="?page={{ comment_children_list.next_page_number }}&comment_id={{ comment_id }}&article_id={{ article_id }}">下一页 &raquo;</a>
+                    {% else %}
+                        <a style="display: none">下一页 &raquo;</a>
+                    {% endif %}
+
+				</p>
+
+				<p class="f-left">{{ comment_children_list.number }} / {{ comment_children_list.paginator.num_pages }}页</p>
+
+			</div>
+
+        <h3>发言:</h3>
+    <form action="{% url 'comment_post' %}" method="post">
+        {% csrf_token %}
+
+        <p>{{ comment_form.author }}
+            <label for="author">Name (required)</label></p>
+
+        <p>{{ comment_form.email }}
+            <label for="email">Email (Will NOT be published) (required)</label></p>
+
+        <p>{{ comment_form.url }}
+            <label for="url">URL</label></p>
+
+
+        <p>{{ comment_form.comment }}</p>
+
+        <p>
+            {#   隐藏属性     #}
+            {{ comment_form.article }}
+
+            {{ comment_form.pid }}
+            <input type="submit" value=" 提交 " class="input-submit">
+        </p>
+    </form>
+
+    </div>
+
+{% endblock %}

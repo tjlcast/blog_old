@@ -21,3 +21,27 @@
 2016-09-29 03:30:12,304 [Thread-12:123145323335680] [blog.views:177] [views:do_login] [ERROR] - Reverse for '' with arguments '()' and keyword arguments '{}' not found. 0 pattern(s) tried: []
 2016-09-29 03:32:12,714 [Thread-32:123145323335680] [blog.views:177] [views:do_login] [ERROR] - failure.html
 2016-09-29 03:33:08,122 [Thread-34:123145323335680] [blog.views:177] [views:do_login] [ERROR] - failure.html
+2016-10-07 12:46:08,037 [Thread-9:123145323335680] [blog.views:122] [views:comment_post] [ERROR] - failure.html
+2016-10-07 12:46:13,857 [Thread-11:123145323335680] [blog.views:122] [views:comment_post] [ERROR] - failure.html
+2016-10-07 12:46:17,545 [Thread-13:123145323335680] [blog.views:122] [views:comment_post] [ERROR] - failure.html
+2016-10-07 12:47:30,343 [Thread-87:123145323335680] [blog.views:122] [views:comment_post] [ERROR] - failure.html
+2016-10-07 12:49:46,045 [Thread-143:123145323335680] [blog.views:122] [views:comment_post] [ERROR] - failure.html
+2016-10-07 12:49:58,530 [Thread-145:123145323335680] [blog.views:122] [views:comment_post] [ERROR] - failure.html
+2016-10-07 15:04:52,958 [Thread-7:123145323335680] [blog.views:235] [views:reply_comment] [ERROR] -  and 不是POST方法
+2016-10-07 15:05:13,404 [Thread-7:123145323335680] [blog.views:235] [views:reply_comment] [ERROR] -  and 不是POST方法
+2016-10-07 15:06:03,123 [Thread-24:123145323335680] [blog.views:235] [views:reply_comment] [ERROR] -  and 不是POST方法
+2016-10-07 15:36:27,315 [Thread-85:123145323335680] [blog.views:244] [views:reply_comment] [ERROR] -  and 不是POST方法
+2016-10-07 15:36:27,327 [Thread-87:123145327542272] [blog.views:244] [views:reply_comment] [ERROR] -  and 不是POST方法
+2016-10-07 15:36:35,851 [Thread-89:123145335955456] [blog.views:244] [views:reply_comment] [ERROR] -  and 不是POST方法
+2016-10-07 15:38:16,999 [Thread-10:123145323335680] [blog.views:245] [views:reply_comment] [ERROR] -  and 不是POST方法
+2016-10-07 15:49:31,280 [Thread-53:123145323335680] [blog.views:245] [views:reply_comment] [ERROR] -  and 不是POST方法
+2016-10-07 15:49:38,705 [Thread-55:123145323335680] [blog.views:245] [views:reply_comment] [ERROR] -  and 不是POST方法
+2016-10-07 15:51:30,271 [Thread-7:123145323335680] [blog.views:243] [views:reply_comment] [ERROR] - Comment matching query does not exist.
+2016-10-07 15:51:55,844 [Thread-44:123145323335680] [blog.views:243] [views:reply_comment] [ERROR] - Comment matching query does not exist.
+2016-10-07 15:58:14,135 [Thread-64:123145323335680] [blog.views:243] [views:reply_comment] [ERROR] - Comment matching query does not exist.
+2016-10-07 16:00:56,188 [Thread-69:123145323335680] [blog.views:243] [views:reply_comment] [ERROR] - Comment matching query does not exist.
+2016-10-07 16:01:03,069 [Thread-89:123145323335680] [blog.views:243] [views:reply_comment] [ERROR] - Comment matching query does not exist.
+2016-10-08 15:25:55,157 [Thread-47:123145323335680] [blog.views:244] [views:reply_comment] [ERROR] - Comment matching query does not exist.
+2016-10-08 15:27:55,587 [Thread-48:123145323335680] [blog.views:244] [views:reply_comment] [ERROR] - Comment matching query does not exist.
+2016-10-08 15:27:55,644 [Thread-52:123145327542272] [blog.views:244] [views:reply_comment] [ERROR] - Comment matching query does not exist.
+2016-10-08 15:34:59,472 [Thread-126:123145323335680] [blog.views:177] [views:do_login] [ERROR] - failure.html

@@ -1,5 +1,7 @@
-{% include 'header.html' %}
+{#{% include 'header.html' %}#}
+{% extends '__base__.html' %}
 
+{% block content %}
 <!-- COLUMNS -->
 	<div id="section" class="box">
 		<div class="button black"> {{ category.name }} </div>
@@ -90,5 +92,5 @@
 	</div>
 
 
-
-{% include 'footer.html' %}
+{% endblock %}
+{#{% include 'footer.html' %}#}

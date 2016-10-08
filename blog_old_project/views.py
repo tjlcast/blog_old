@@ -16,7 +16,6 @@ from django.core.paginator import Paginator, InvalidPage, EmptyPage, PageNotAnIn
 from blog_old_project.tools.MyPagination import JuncheePaginator
 
 
-
 logger = logging.getLogger('blog.views')
 # Create your views here.
 
@@ -220,3 +219,52 @@ def do_logout(request):
         logger.error(e)
     return redirect(request.META['HTTP_REFERER'])
 
+
+# 评论回复
+def reply_comment(request):
+    try:
+            # 得到评论id 和 文章id 和 分号码
+            comment_id = request.GET.get('comment_id')
+            article_id = request.GET.get('article_id')
+            page = request.GET.get('page', 1)
+
+            # 评论表单
+            comment_form = CommentForm({'author': request.user.username,
+                                        'email': request.user.email,
+                                        'url': request.user.url,
+                                        'article': article_id,
+                                        'pid' : comment_id} if request.user.is_authenticated() else{'article': article_id})
+
+            # 获取评论信息
+            comment = Comment.objects.get(pk=comment_id)
+            comment_children_list = Comment.objects.filter(pid=comment_id)
+            comment_children_list = getPaginator(request, comment_children_list, page, 8)
+
+    except Exception as e:
+        logger.error(e)
+        return render(request, 'failure.html', {'msg': '获取评论信息失败'+str(e)})
+    return render(request, 'reply_comment.html', locals())
+
+
+def blogs(request):
+    return render(request, 'newPages/blogs.html', locals())
+
+
+def blog(request):
+    return render(request, 'newPages/blog.html', locals())
+
+
+def signin(request):
+    return render(request, 'newPages/signin.html', locals())
+
+
+def register(request):
+    return render(request, 'newPages/register.html', locals())
+
+
+def blog_edit(request):
+    return render(request, 'newPages/manage_blog_edit.html', locals())
+
+
+def mark(request):
+    return render(request, 'newPages/mark_page.html', locals())

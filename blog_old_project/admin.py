@@ -26,12 +26,32 @@ class ArticleAdmin(admin.ModelAdmin):
         }),
     )
 
-    class Media:
-        js = (
-            '/static/js/kindeditor-master/kindeditor-all-min.js',
-            '/static/js/kindeditor-master/lang/zh_CN.js',
-            '/static/js/kindeditor-master/config.js',
-        )
+    # class Media:
+    #     js = (
+    #         '/static/js/kindeditor-4.1.10/kindeditor-all-min.js',
+    #         '/static/js/kindeditor-4.1.10/lang/zh_CN.js',
+    #         '/static/js/kindeditor-4.1.10/config.js',
+    #     )
+
+    # class Media:
+    #     js = (
+    #         "/static/js/jquery.min.js",
+    #         "/static/uikit/js/uikit.min.js",
+    #         "/static/codemirror/lib/codemirror.js",
+    #         "/static/codemirror/mode/markdown/markdown.js",
+    #         "/static/codemirror/addon/mode/overlay.js",
+    #         "/static/codemirror/mode/xml/xml.js",
+    #         "/static/codemirror/mode/gfm/gfm.js",
+    #         "/static/js/marked/marked.min.js",
+    #         "/static/uikit/js/components/htmleditor.js",
+    #         "/static/js/config.js",
+    #     )
+    #     css = {'all':(
+    #         "/static/uikit/css/uikit.min.css",
+    #         "/static/uikit/css/components/htmleditor.css",
+    #         "/static/codemirror/lib/codemirror.css",
+    #     )}
+
 
 
 admin.site.register(User)

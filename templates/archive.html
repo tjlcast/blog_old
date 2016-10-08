@@ -1,5 +1,7 @@
-{% include 'header.html' %}
+{% extends '__base__.html' %}
+{#{% include 'header.html' %}#}
 
+{% block content %}
 <!-- COLUMNS -->
 	<div id="section" class="box">
 		<div class="button black"> {{ year }}-{{ month }}文件归档 </div>
@@ -48,5 +50,5 @@
 	</div>
 
 
-
-{% include 'footer.html' %}
+{% endblock %}
+{#{% include 'footer.html' %}#}

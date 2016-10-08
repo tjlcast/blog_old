@@ -1,0 +1,67 @@
+
+{% load staticfiles %}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<meta http-equiv="content-language" content="en" />
+	<meta name="description" content="{{ SITE_DESC }}" />
+	<meta name="author" content="Template:TemplatesDock " />
+	<link rel="stylesheet" media="screen,projection" type="text/css" href="{% static 'css/main.css' %}" />
+	<link rel="stylesheet" media="screen,projection" type="text/css" href="{% static 'css/skin.css' %}" />
+    <link rel="stylesheet" media="screen,projection" type="text/css" href="{% static 'css/botton.css' %}" />
+    <link href="http://yangze01.github.io/fancybox/jquery.fancybox.css" rel="stylesheet" />
+	<script type="text/javascript" src="{% static 'javascript/cufon-yui.js' %}"></script>
+
+	<script type="text/javascript">Cufon.replace('h1, h2, h3, h4, h5, h6', {hover:true});</script>
+	<title>{{ SITE_NAME }}</title>
+    {% block beforehead %}<!-- before head  -->{% endblock %}
+</head>
+
+<body>
+
+<div class="main">
+
+	<!-- HEADER -->
+	<div id="header" class="box">
+
+		<h1 id="logo">Blog<span> {{ SITE_NAME }}</span></h1>
+
+		<!-- NAVIGATION -->
+		<ul id="nav">
+			<li {% if request.path == '/' %}class="current"{% endif %}><a href='{% url 'index' %}'>首页</a></li>
+            {% if request.user.is_authenticated %}
+			<li {% if request.path == '/logout/' %}class="current"{% endif %}><a href="{% url 'logout' %}" onclick="return isSure();">注销</a></li>
+            <script>function isSure(){
+                var mes=confirm("您确定要注销吗？");
+                if(mes==true){ return true; }
+                return false;
+                }
+            </script>
+                <li style="display: {% if not request.user.is_authenticated %}none{% endif %}" ><a>welcome {{ request.user.username }}</a></li>
+            {% else %}
+            <li {% if request.path == '/login/' %}class="current"{% endif %}><a href="{% url 'login' %}">登录</a></li>
+            {% endif %}
+		</ul>
+
+	</div> <!-- /header -->
+
+    {% block content %}
+    {% endblock %}
+
+
+</div> <!-- /main -->
+
+<!-- FOOTER -->
+<div id="footer">
+
+	<div class="main box">
+		<p class="f-right t-right"> 联系我（tjl） |  使用须知</p>
+		<p class="f-left">Copyright &copy;&nbsp;2016 <a href="http://www.maiziedu.com/">tjlcast</a></p>
+	</div>
+
+</div> <!-- /footer -->
+</body>
+</html>

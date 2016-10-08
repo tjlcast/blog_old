@@ -1,7 +1,8 @@
-{% include 'header.html' %}
+{#{% include 'header.html' %}#}
+{% extends '__base__.html' %}
 {% load myfilter %}
 
-
+{% block content %}
 <!-- SECTION -->
 	<div id="section" class="box">
 
@@ -67,4 +68,5 @@
 		{% include 'right.html' %}
 
 	</div> <!-- /section -->
-{% include 'footer.html' %}
+{#{% include 'footer.html' %}#}
+{% endblock %}
