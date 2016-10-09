@@ -91,6 +91,12 @@ def article(request):
                         break
                 if comment.pid is None:
                     comment_list.append(comment)
+            for comment in comment_list:
+                has_more_comment = False
+                if len(comment.children_comment) > 3:
+                    has_more_comment = True
+                    comment.children_comment = comment.children_comment[:3]
+                setattr(comment, 'has_more_comment', has_more_comment)
         except Exception as e:
             return render(request, 'faliure.html', {'msg', '获取'+str(id)+'文章的评论失败'})
 
