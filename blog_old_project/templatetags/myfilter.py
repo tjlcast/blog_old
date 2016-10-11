@@ -4,7 +4,7 @@ from django import template
 # from markdown import markdown
 from django.utils.encoding import force_text
 from django.utils.safestring import mark_safe
-# import markdown2
+import markdown
 import blog_old_project.markdown2
 register = template.Library()
 
@@ -42,6 +42,14 @@ def my_markdown(value):
     return value
 
 
+def custom_markdown(value):
+    return mark_safe(markdown.markdown(value,
+                                       extensions=['markdown.extensions.fenced_code', 'markdown.extensions.codehilite'],
+                                       safe_mode=True,
+                                       enable_attributes=False))
+
+
+register.filter('custom_markdown', custom_markdown)
 register.filter('my_markdown', my_markdown)
 register.filter('month_to_upper', month_to_upper)
 register.filter('list_empty', list_empty)

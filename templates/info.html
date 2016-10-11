@@ -19,6 +19,11 @@
     <!-- HTML editor CSS and JavaScript -->
     <link rel="stylesheet" href="/static/uikit/css/components/htmleditor.css">
     <script src="/static/uikit/js/components/htmleditor.js"></script>
+    <style type="text/css"></style>
+
+    {#    #}
+{#    <script charset="UTF-8" src="http://js.t.sinajs.cn/open/api/js/api/bundle.js?version=20150130.02"></script>#}
+{#    <script charset="UTF-8" src="http://js.t.sinajs.cn/open/api/js/widget/iframeWidget/iframeWidget.js?version=20140327"></script>#}
 {% endblock %}
 
 
@@ -36,7 +41,7 @@
 
     <div style="border-bottom: 1px dotted #CCC; height:50px;"></div>
     <div style="padding:10px">
-        {{ article.content | my_markdown | safe}}
+        {{ article.content | custom_markdown | safe}}
     </div>
     <div style="border-bottom: 1px dotted #CCC;"></div>
     <h3>评论:</h3>
@@ -52,7 +57,7 @@
                 <a href="{% url 'reply_comment' %}?comment_id={{ comment.id }}&article_id={{ comment.article.id }}" style="float: right"> 回复 </a>
                 <a href="#">{{ comment.user.username }}说：</a>
             </div>
-            {{ comment.content | my_markdown| safe }}
+            {{ comment.content | custom_markdown| safe }}
             评论时间: {{ comment.date_publish | date:'Y/m/d - H:i:s' }}
             <br />
         </div>
@@ -64,7 +69,7 @@
             <div>
                 <a href="#">{{ comment.username }} 回复：{{ childc.username }}</a>
             </div>
-            {{ childc.content | my_markdown | safe }}
+            {{ childc.content | custom_markdown | safe }}
             评论时间: {{ childc.date_publish | date:'Y/m/d - H:i:s' }}
             <br />
 
