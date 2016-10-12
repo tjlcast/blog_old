@@ -1,0 +1,89 @@
+{% extends '__base__.html' %}
+{% load myfilter %}
+
+{% block beforehead %}
+    <link rel="stylesheet" href="/static/uikit/css/uikit.min.css"/>
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/uikit/js/uikit.min.js"></script>
+
+    <!-- Codemirror and marked dependencies -->
+    <link rel="stylesheet" href="/static/codemirror/lib/codemirror.css">
+    <script src="/static/codemirror/lib/codemirror.js"></script>
+    <script src="/static/codemirror/mode/markdown/markdown.js"></script>
+    <script src="/static/codemirror/addon/mode/overlay.js"></script>
+    <script src="/static/codemirror/mode/xml/xml.js"></script>
+    <script src="/static/codemirror/mode/gfm/gfm.js"></script>
+    <script src="/static/js/marked/marked.min.js"></script>
+
+    <!-- HTML editor CSS and JavaScript -->
+    <link rel="stylesheet" href="/static/uikit/css/components/htmleditor.css">
+    <script src="/static/uikit/js/components/htmleditor.js"></script>
+    <style type="text/css"></style>
+
+{% endblock %}
+
+
+{% block content %}
+<div id="section" class="box">
+    <h2>发博文</h2>
+
+    <div style="border-bottom: 1px dotted #CCC;"></div>
+
+
+    <form action="#" method="post" class="form" style="display: none">
+        <ul>
+            <li>
+                <input type="text" size="45" class="input-text" placeholder="请输入博文title" name="">
+                分类:
+                <select>
+                <option>1</option>
+                </select>
+                只自己可见<input type="checkbox" name="checkbox1" value="">
+            </li>
+            <script id="editor" type="text/plain" style="width:900px;height:500px;"></script>
+
+            <li><input type="submit" value=" 提交 " class="input-submit"/></li>
+
+        </ul>
+    </form>
+
+
+    <form action="{% url 'article_post' %}" method="post">
+        {% csrf_token %}
+
+        <p>
+            <label for="title">title (required)</label>
+            {{ article_form.title }}
+        </p>
+
+        <p>
+            <label for="desc">desc (required)</label>
+            {{ article_form.desc }}
+        </p>
+
+
+        <p>{{ article_form.content }}</p>
+
+        <p>
+            <label for="user">user</label>{{ article_form.user }}
+        </p>
+
+        <p>
+            <label for="category">category</label>{{ article_form.category }}
+        </p>
+
+        <p>
+            <label for="tag">tag</label>{{ article_form.tag }}
+        </p>
+
+        <p>
+            {#   隐藏属性     #}
+            {{ article_form.article }}
+
+            {{ article_form.pid }}
+            <input type="submit" value=" 提交 " class="input-submit">
+        </p>
+    </form>
+
+</div>
+{% endblock %}

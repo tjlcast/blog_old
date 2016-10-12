@@ -28,6 +28,8 @@ from blog_old_project.views import register
 from blog_old_project.views import blog_edit
 from blog_old_project.views import mark
 from blog_old_project.views import reply_comment
+from blog_old_project.views import article_add
+from blog_old_project.views import article_post
 
 
 urlpatterns = [
@@ -35,14 +37,11 @@ urlpatterns = [
     url(r'^comment/post/$', comment_post, name='comment_post'),
     url(r'category/$', category, name='category'),
     url(r'login/$', do_login, name='login'),
-    # url(r'register/$', do_register, name='register'),
+    url(r'register/$', do_register, name='register'),
     url(r'logout/$', do_logout, name='logout'),
     url(r'archive/$', archive, name='archive'),
-    url(r'blog/$', blog, name='blog'),
-    url(r'blogs/$', blogs, name='blogs'),
-    url(r'signin/$', signin, name='signin'),
-    url(r'register/$', register, name='register'),
-    url(r'blog_edit/$', blog_edit, name='blog_edit'),
     url(r'mark/$', mark, name='mark'),
     url(r'reply_comment/$', reply_comment, name='reply_comment'),
+    url(r'article_add/$', article_add, name='article_add'),
+    url(r'article_post/$', article_post, name='article_post'),
 ]

@@ -45,3 +45,9 @@
 2016-10-08 15:27:55,587 [Thread-48:123145323335680] [blog.views:244] [views:reply_comment] [ERROR] - Comment matching query does not exist.
 2016-10-08 15:27:55,644 [Thread-52:123145327542272] [blog.views:244] [views:reply_comment] [ERROR] - Comment matching query does not exist.
 2016-10-08 15:34:59,472 [Thread-126:123145323335680] [blog.views:177] [views:do_login] [ERROR] - failure.html
+2016-10-11 13:48:50,199 [Thread-21:123145310715904] [blog.views:282] [views:article_post] [ERROR] - int() argument must be a string or a number, not 'list'
+2016-10-11 13:49:42,761 [Thread-36:123145310715904] [blog.views:282] [views:article_post] [ERROR] - int() argument must be a string or a number, not 'list'
+2016-10-11 13:50:46,757 [Thread-7:123145323335680] [blog.views:282] [views:article_post] [ERROR] - int() argument must be a string or a number, not 'list'
+2016-10-11 13:55:44,759 [Thread-7:123145323335680] [blog.views:281] [views:article_post] [ERROR] - failure.html
+2016-10-11 13:56:27,727 [Thread-13:123145327542272] [blog.views:281] [views:article_post] [ERROR] - int() argument must be a string or a number, not 'list'
+2016-10-11 14:03:25,831 [Thread-7:123145323335680] [blog.views:283] [views:article_post] [ERROR] - failure.html
