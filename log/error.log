@@ -51,3 +51,4 @@
 2016-10-11 13:55:44,759 [Thread-7:123145323335680] [blog.views:281] [views:article_post] [ERROR] - failure.html
 2016-10-11 13:56:27,727 [Thread-13:123145327542272] [blog.views:281] [views:article_post] [ERROR] - int() argument must be a string or a number, not 'list'
 2016-10-11 14:03:25,831 [Thread-7:123145323335680] [blog.views:283] [views:article_post] [ERROR] - failure.html
+2016-10-13 03:34:15,928 [Thread-587:123145310715904] [blog.views:184] [views:do_login] [ERROR] - failure.html

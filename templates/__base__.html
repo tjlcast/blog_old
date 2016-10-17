@@ -20,6 +20,16 @@
 	<title>{{ SITE_NAME }}</title>
 
     {% block beforehead %}<!-- before head  -->{% endblock %}
+
+    <!-- load uikit core  -->
+    <link rel="stylesheet" href="/static/uikit/css/uikit.css">
+    <script src="/static/uikit/js/core/core.js"></script>
+    <script src="/static/uikit/js/core/dropdown.js"></script>
+
+    <link rel="stylesheet" href="/static/uikit/css/uikit.min.css"/>
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/uikit/js/uikit.min.js"></script>
+
 </head>
 
 <body>
@@ -34,6 +44,7 @@
 		<!-- NAVIGATION -->
 		<ul id="nav">
 			<li {% if request.path == '/' %}class="current"{% endif %}><a href='{% url 'index' %}'>首页</a></li>
+
             {% if request.user.is_authenticated %}
 			<li {% if request.path == '/logout/' %}class="current"{% endif %}><a href="{% url 'logout' %}" onclick="return isSure();">注销</a></li>
             <script>function isSure(){
@@ -42,9 +53,14 @@
                 return false;
                 }
             </script>
-                <li style="display: {% if not request.user.is_authenticated %}none{% endif %}" ><a>welcome {{ request.user.username }}</a></li>
+                <li style="display: {% if not request.user.is_authenticated %}none{% endif %}" >
+                    <a>welcome {{ request.user.username }}</a>
+                </li>
+                <li style="display: {% ifequal request.user.username 'admin' %}block{% else %}none{% endifequal %}" >
+                    <a href="{% url 'article_add' %}">写博文</a>
+                </li>
             {% else %}
-            <li {% if request.path == '/login/' %}class="current"{% endif %}><a href="{% url 'login' %}">登录</a></li>
+                <li {% if request.path == '/login/' %}class="current"{% endif %}><a href="{% url 'login' %}">登录</a></li>
             {% endif %}
 		</ul>
 

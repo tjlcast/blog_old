@@ -17,11 +17,24 @@
     <!-- HTML editor CSS and JavaScript -->
     <link rel="stylesheet" href="/static/uikit/css/components/htmleditor.css">
     <script src="/static/uikit/js/components/htmleditor.js"></script>
+
+    <!-- upload img  -->
+    <link rel="stylesheet" href="/static/uikit/css/components/upload.min.css">
+    <script src="/static/uikit/js/components/upload.js"></script>
+
+    <!-- load uikit core  -->
+    <link rel="stylesheet" href="/static/uikit/css/uikit.css">
+    <script src="/static/uikit/js/core/core.js"></script>
+    <script src="/static/uikit/js/core/dropdown.js"></script>
+
 </head>
 <body>
+
 <textarea data-uk-htmleditor>...</textarea>
 
-<div id="content"><default></default></div>
+<div id="content">
+    <default></default>
+</div>
 <script>
 
     {#    var marked = require('marked');#}
@@ -38,14 +51,114 @@
     });
 
     // Using async version of marked
-marked(markdownString, function (err, content) {
-  if (err) throw err;
-  console.log(content);
-});
+    marked(markdownString, function (err, content) {
+        if (err) throw err;
+        console.log(content);
+    });
 
 
     document.getElementById('content').innerHTML =
             marked(markdownString);
 </script>
+
+<div>
+
+    <hr/>
+
+    <div id="upload-drop" class="uk-placeholder">
+        <i class="uk-icon-cloud-upload uk-icon-medium uk-text-muted uk-margin-small-right"></i>Info text... <a
+            class="uk-form-file">Select a file<input id="upload-select" type="file"></a>.
+    </div>
+
+    <div id="progressbar" class="uk-progress uk-hidden">
+        <div class="uk-progress-bar" style="width: 0%;">...</div>
+    </div>
+    <script>
+        $(function () {
+
+            var progressbar = $("#progressbar"),
+                    bar = progressbar.find('.uk-progress-bar'),
+                    settings = {
+
+                        single: true, // 逐一上传
+
+                        action: '{% url 'upload_image' %}', // 上传路径 url
+
+                        allow: '*.(jpg|jpeg|gif|png)', // 只允许上传图片
+
+                        type: 'json',  // 来自服务器的响应类型
+
+                        loadstart: function () {
+                            bar.css("width", "0%").text("0%");
+                            progressbar.removeClass("uk-hidden");
+                        },
+
+                        progress: function (percent) {
+                            percent = Math.ceil(percent);
+                            bar.css("width", percent + "%").text(percent + "%");
+                        },
+
+                        complete: function (response) {
+                            alert(response)
+                        },
+
+                        allcomplete: function (response) {
+
+                            bar.css("width", "100%").text("100%");
+
+                            setTimeout(function () {
+                                progressbar.addClass("uk-hidden");
+                            }, 250);
+
+                            alert("Upload Completed");
+                            url = response['url'];
+
+                            alert(url);
+
+
+                        }
+                    };
+
+            var select = UIkit.uploadSelect($("#upload-select"), settings),
+                    drop = UIkit.uploadDrop($("#upload-drop"), settings);
+        });
+    </script>
+</div>
+
+
+<!-- 这是JavaScript关联的容器 -->
+<div data-uk-dropdown class="uk-button-dropdown">
+
+    <!-- 拨动下拉菜单的元素 -->
+    <div>welcome</div>
+    <!-- 这是下拉菜单 -->
+{#    <div class="uk-dropdown">welcome</div>#}
+    <div class="uk-dropdown" class="uk-button-dropdown">
+        <ul class="uk-nav uk-nav-dropdown">
+            <li>hello</li>
+            <li>world</li>
+            <li>java</li>
+        </ul>
+    </div>
+</div>
+
+<hr />
+
+<div class="uk-button-dropdown" data-uk-dropdown="" aria-haspopup="true" aria-expanded="false">
+    <button class="uk-button">鼠标来悬停我呀 <i class="uk-icon-caret-down"></i></button>
+    <div class="uk-dropdown uk-dropdown-top" style="top: -218px; left: 0px;">
+        <ul class="uk-nav uk-nav-dropdown">
+            <li><a href="#">Item</a></li>
+            <li><a href="#">Another item</a></li>
+            <li class="uk-nav-header">Header</li>
+            <li><a href="#">Item</a></li>
+            <li><a href="#">Another item</a></li>
+            <li class="uk-nav-divider"></li>
+            <li><a href="#">Separated item</a></li>
+        </ul>
+    </div>
+</div>
+
+
 </body>
 </html>

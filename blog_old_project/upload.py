@@ -10,13 +10,13 @@ import datetime as dt
 
 
 @csrf_exempt
-def upload_image(request, dir_name) :
+def upload_image(request) :
     # kindeditor 图片上传返回数据格式说明 （格式为kindeditor要求）
     # {‘error’: 1, 'message': '出错信息'｝
     # {'error': 0, 'url' : '图片地址'}
-
+    dir_name = 'img'
     result = {'error': 1, "message": '上传出错'}
-    files = request.FILES.get("imgFile", None)
+    files = request.FILES.get("files[]", None)
     if files:
         result = image_upload(files, dir_name)
     return HttpResponse(json.dumps(result), content_type='application/json')

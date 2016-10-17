@@ -30,6 +30,7 @@ from blog_old_project.views import mark
 from blog_old_project.views import reply_comment
 from blog_old_project.views import article_add
 from blog_old_project.views import article_post
+from blog_old_project.upload import upload_image
 
 
 urlpatterns = [
@@ -44,4 +45,5 @@ urlpatterns = [
     url(r'reply_comment/$', reply_comment, name='reply_comment'),
     url(r'article_add/$', article_add, name='article_add'),
     url(r'article_post/$', article_post, name='article_post'),
+    url(r'upload_image/', upload_image, name='upload_image'),
 ]
